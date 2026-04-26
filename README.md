@@ -31,13 +31,14 @@ Baseline config to rebuild this gaming machine from scratch on a clean Windows 1
 | OpenAI Codex CLI | AI coding CLI | winget |
 | Google Gemini CLI | AI coding CLI | npm |
 | NVIDIA App | Driver updates + overlay | manual (nvidia.com) |
+| Cheat Happens Aurora | Game trainer manager | manual (cheathappens.com) |
 
 ## Bootstrap — fresh Windows 11 install
 
 ### Step 1 — Clone this repo
 
 ```powershell
-git clone https://github.com/kennymoy/gaming-pc-setup.git
+git clone https://github.com/acr79/gaming-pc-setup.git
 cd gaming-pc-setup
 ```
 
@@ -69,7 +70,11 @@ Windows 11 blocks programmatic default-browser changes. After the script opens S
 
 Not available in winget. Download and install manually from nvidia.com, then sign in to enable driver auto-updates and the in-game overlay.
 
-### Step 6 — Optional gaming tweaks
+### Step 6 — Cheat Happens Aurora
+
+Not available in winget. Download and install from cheathappens.com/aurora (requires a Cheat Happens account). Aurora manages and launches game trainers for single-player titles.
+
+### Step 7 — Optional gaming tweaks
 
 | Tweak | Where |
 |-------|-------|

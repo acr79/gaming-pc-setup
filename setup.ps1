@@ -58,6 +58,11 @@ Write-Step "NVIDIA App"
 Write-Warn "NVIDIA App is not in winget — download it from nvidia.com/en-us/software/nvidia-app/"
 Write-Warn "It replaces GeForce Experience for driver updates and overlay features."
 
+# --- 3d. Cheat Happens Aurora (manual download required) ---
+Write-Step "Cheat Happens Aurora"
+Write-Warn "Aurora is not in winget — download it from cheathappens.com/aurora (account required)."
+Write-Warn "Aurora manages and launches game trainers for single-player titles."
+
 # --- 4. Set Chrome as default browser ---
 Write-Step "Chrome default browser"
 Write-Warn "Windows 11 requires you to set the default browser manually:"
