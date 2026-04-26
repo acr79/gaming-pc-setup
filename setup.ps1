@@ -58,10 +58,25 @@ Write-Step "NVIDIA App"
 Write-Warn "NVIDIA App is not in winget — download it from nvidia.com/en-us/software/nvidia-app/"
 Write-Warn "It replaces GeForce Experience for driver updates and overlay features."
 
-# --- 3d. Cheat Happens Aurora (manual download required) ---
+# --- 3d. Cheat Happens Aurora ---
 Write-Step "Cheat Happens Aurora"
-Write-Warn "Aurora is not in winget — download it from cheathappens.com/aurora (account required)."
-Write-Warn "Aurora manages and launches game trainers for single-player titles."
+$auroraDir  = Join-Path $env:LOCALAPPDATA "Aurora"
+$auroraExe  = Join-Path $auroraDir "Aurora.exe"
+$auroraZip  = Join-Path $env:TEMP "Aurora.zip"
+if (Test-Path $auroraExe) {
+    Write-Ok "Aurora already installed at $auroraDir"
+} else {
+    if ($DryRun) {
+        Write-Warn "DryRun: would download and extract Aurora to $auroraDir"
+    } else {
+        Write-Host "  Downloading Aurora..."
+        Invoke-WebRequest -Uri "https://www.ch-downloads.com/TM/Aurora.zip" -OutFile $auroraZip -UseBasicParsing
+        Write-Host "  Extracting..."
+        Expand-Archive -Path $auroraZip -DestinationPath $auroraDir -Force
+        Remove-Item $auroraZip
+        Write-Ok "Aurora extracted to $auroraDir — launch Aurora.exe as Administrator to complete setup"
+    }
+}
 
 # --- 4. Set Chrome as default browser ---
 Write-Step "Chrome default browser"

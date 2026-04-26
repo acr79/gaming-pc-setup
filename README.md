@@ -31,7 +31,7 @@ Baseline config to rebuild this gaming machine from scratch on a clean Windows 1
 | OpenAI Codex CLI | AI coding CLI | winget |
 | Google Gemini CLI | AI coding CLI | npm |
 | NVIDIA App | Driver updates + overlay | manual (nvidia.com) |
-| Cheat Happens Aurora | Game trainer manager | manual (cheathappens.com) |
+| Cheat Happens Aurora | Game trainer manager | script (cheathappens.com) |
 
 ## Bootstrap — fresh Windows 11 install
 
@@ -72,7 +72,7 @@ Not available in winget. Download and install manually from nvidia.com, then sig
 
 ### Step 6 — Cheat Happens Aurora
 
-Not available in winget. Download and install from cheathappens.com/aurora (requires a Cheat Happens account). Aurora manages and launches game trainers for single-player titles.
+`setup.ps1` downloads and extracts Aurora automatically to `%LOCALAPPDATA%\Aurora`. After the script finishes, run `Aurora.exe` as Administrator once to complete setup. No account required to download.
 
 ### Step 7 — Optional gaming tweaks
 
