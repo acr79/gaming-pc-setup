@@ -2,6 +2,19 @@
 
 Baseline config to rebuild this gaming machine from scratch on a clean Windows 11 install.
 
+## Machine Specs (baseline hardware)
+
+| Component | Details |
+|-----------|---------|
+| Motherboard | Gigabyte X870I AORUS PRO ICE (Mini-ITX, AM5) |
+| CPU | AMD Ryzen 9000 series (Zen 5 / Granite Ridge) |
+| RAM | 32 GB |
+| Storage | 3.8 TB |
+| GPU | NVIDIA (driver 576.88) |
+| WiFi | Realtek Wi-Fi 7 |
+| OS | Windows 11 Pro, Build 26100 |
+| BIOS | AMI FA2 (3/12/2025) |
+
 ## What gets installed
 
 | App | Purpose | Install method |
@@ -21,54 +34,65 @@ Baseline config to rebuild this gaming machine from scratch on a clean Windows 1
 
 ## Bootstrap — fresh Windows 11 install
 
-### Step 1 — Run the setup script
+### Step 1 — Clone this repo
 
-Open **PowerShell as Administrator** and run:
+```powershell
+git clone https://github.com/kennymoy/gaming-pc-setup.git
+cd gaming-pc-setup
+```
+
+### Step 2 — Run the setup script
+
+Open **PowerShell as Administrator**:
 
 ```powershell
 Set-ExecutionPolicy Bypass -Scope Process -Force
-cd C:\path\to\gaming-pc-setup   # or wherever you cloned this repo
 .\setup.ps1
 ```
 
-The script will:
-- Install all apps via winget
-- Open the default-browser settings page (set Chrome manually — Windows 11 requires a click)
+The script installs all apps via winget, installs Gemini CLI via npm, and opens the default-browser Settings page.
 
-### Step 2 — Set Chrome as default browser
+### Step 3 — Set Chrome as default browser
 
 Windows 11 blocks programmatic default-browser changes. After the script opens Settings:
 
 `Settings > Apps > Default Apps > Google Chrome > Set as default`
 
-### Step 3 — Sign into launchers
+### Step 4 — Sign into launchers
 
-Sign in to each launcher to restore your libraries:
 - Steam
 - Epic Games
 - Battle.net
 - Xbox app
 
-### Step 4 — Optional gaming tweaks
+### Step 5 — NVIDIA App
 
-- **HAGS** (Hardware-Accelerated GPU Scheduling): `Settings > System > Display > Graphics > Change default graphics settings`
-- **XMP/EXPO**: Enable in BIOS for full RAM speed
-- **Game Mode**: Already on by default in Windows 11
+Not available in winget. Download and install manually from nvidia.com, then sign in to enable driver auto-updates and the in-game overlay.
+
+### Step 6 — Optional gaming tweaks
+
+| Tweak | Where |
+|-------|-------|
+| XMP/EXPO (full RAM speed) | BIOS |
+| HAGS (GPU scheduling) | Settings > System > Display > Graphics > Change default graphics settings |
+| Game Mode | On by default in Windows 11 |
+| Xbox Game Bar overlay | Win + G |
 
 ## Files
 
 | File | Purpose |
 |------|---------|
 | `setup.ps1` | One-command bootstrap script |
-| `winget-gaming.json` | Winget package bundle (gaming + core apps) |
-| `winget-packages.json` | Full winget export snapshot of this machine |
+| `winget-gaming.json` | Winget package bundle (gaming + core apps only) |
+| `winget-packages.json` | Full winget snapshot of this machine at baseline |
 
-## Updating the package list
+## Updating the snapshot
 
 After installing new apps you want to track:
 
 ```powershell
 winget export -o winget-packages.json --accept-source-agreements
+git add winget-packages.json
+git commit -m "update winget snapshot"
+git push
 ```
-
-Then commit and push.
